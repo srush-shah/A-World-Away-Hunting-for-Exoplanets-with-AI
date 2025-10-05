@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: exoedge-api
-    env: python
+    name: exoedge-app
+    runtime: python
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn api.deploy_api:app --host 0.0.0.0 --port $PORT
+    buildCommand: pip install -r requirements.txt && pip install -r streamlit_requirements.txt
+    startCommand: python run_app.py
     envVars:
       - key: PYTHONPATH
         value: .

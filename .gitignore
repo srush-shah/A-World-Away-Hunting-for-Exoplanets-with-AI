@@ -189,19 +189,6 @@ local.properties
 # Linux
 *~
 
-# Machine Learning specific
-*.pkl
-*.pickle
-*.joblib
-*.h5
-*.hdf5
-*.model
-*.weights
-*.ckpt
-*.pth
-*.pt
-*.safetensors
-
 # Data files (uncomment if you don't want to track data)
 # *.csv
 # *.json
