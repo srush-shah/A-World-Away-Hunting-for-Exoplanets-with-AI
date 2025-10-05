@@ -18,18 +18,15 @@ def run_fastapi():
         from api.deploy_api import app
         import uvicorn
         
-        # Run on a different port (8001) so Streamlit can use the main port
-        uvicorn.run(app, host="0.0.0.0", port=8001, log_level="info")
+        # Run on port 8000 to match the API_BASE in secrets.toml
+        uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
     except Exception as e:
         print(f"Error starting FastAPI: {e}")
 
 def run_streamlit():
     """Run the Streamlit app"""
     try:
-        # Set the API_BASE environment variable to point to localhost
-        os.environ["API_BASE"] = "http://localhost:8001"
-        
-        # Run Streamlit
+        # Run Streamlit (API_BASE is already set in secrets.toml)
         subprocess.run([
             "streamlit", "run", "src/demo/app.py", 
             "--server.port", os.environ.get("PORT", "10000"),
