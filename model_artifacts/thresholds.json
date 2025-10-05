@@ -1,0 +1,24 @@
+{
+  "feature_order": [
+    "period_days",
+    "dur_hrs",
+    "depth_ppm",
+    "rp_re",
+    "teq_k",
+    "st_teff_k",
+    "st_logg_cgs",
+    "st_rad_rsun",
+    "st_mass_msun",
+    "depth_over_dur",
+    "rp_over_star",
+    "log_period",
+    "log_depth",
+    "duty_cycle",
+    "star_rad_mass_ratio",
+    "rp_est_from_depth"
+  ],
+  "model": "lgb_cal",
+  "picked_on": "tess_val",
+  "thr_target_fpr_10": 0.8961928241863499,
+  "thr_best_macroF1": 0.6252666546663745
+}

@@ -1,0 +1,7 @@
+{
+  "created": "2025-10-04 20:09:21",
+  "train_set": "KOI (100%)",
+  "val_set": "TOI (20%)",
+  "test_set": "TOI (80%)",
+  "model": "LightGBM + Platt calibration"
+}
