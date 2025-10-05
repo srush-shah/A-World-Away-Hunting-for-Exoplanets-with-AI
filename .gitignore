@@ -189,6 +189,8 @@ local.properties
 # Linux
 *~
 
+*/.streamlit/secrets.toml
+
 # Data files (uncomment if you don't want to track data)
 # *.csv
 # *.json

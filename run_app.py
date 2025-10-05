@@ -41,7 +41,7 @@ if __name__ == "__main__":
     api_thread.start()
     
     # Give FastAPI a moment to start
-    time.sleep(3)
+    time.sleep(7)
     
     # Start Streamlit (this will block)
     run_streamlit()
