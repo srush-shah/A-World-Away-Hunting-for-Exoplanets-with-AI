@@ -8,3 +8,13 @@ services:
     envVars:
       - key: PYTHONPATH
         value: .
+  
+  - type: web
+    name: exoedge-streamlit
+    runtime: python
+    plan: free
+    buildCommand: pip install -r streamlit_requirements.txt
+    startCommand: streamlit run src/demo/app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: API_BASE
+        value: https://exoedge-api.onrender.com
