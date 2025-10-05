@@ -20,4 +20,4 @@ Outputs: ranked probabilities, reasons, downloadable CSV, and a leaderboard
 
 ### Hunt for the exoplanets [HERE](https://a-world-away-hunting-for-exoplanets-with-d7es.onrender.com/)!
 
-### Check out [this video](https://drive.google.com/file/d/1uDW9WdQq4psa6G1mbURNno3uMu1hUeTN/view?usp=sharing) of us hunting for the exoplanets.
+### Check out our hunt [demos]([https://drive.google.com/file/d/1uDW9WdQq4psa6G1mbURNno3uMu1hUeTN/view?usp=sharing](https://drive.google.com/drive/folders/1Fglgges9n0_v61pZleGld7YqilmzL20Q?usp=sharing)).
