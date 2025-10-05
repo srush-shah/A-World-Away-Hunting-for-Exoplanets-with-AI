@@ -6,7 +6,7 @@ try:
 except Exception:
     genai = None  # Gemini is optional
 
-API = st.secrets.get("API_BASE", "http://localhost:8000")
+API = st.secrets.get("API_BASE", os.environ.get("API_BASE", "http://localhost:8000"))
 
 
 @st.cache_resource(show_spinner=False)
