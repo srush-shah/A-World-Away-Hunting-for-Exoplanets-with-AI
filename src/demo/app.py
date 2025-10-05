@@ -6,7 +6,17 @@ try:
 except Exception:
     genai = None  # Gemini is optional
 
-API = st.secrets.get("API_BASE", os.environ.get("API_BASE", "http://localhost:8000"))
+def get_secret_or_env(key: str, default: str | None = None):
+    val = os.environ.get(key)
+    if val is not None:
+        return val
+    try:
+        return st.secrets.get(key, default)
+    except Exception:
+        return default
+
+
+API = get_secret_or_env("API_BASE", "http://localhost:8000")
 
 
 @st.cache_resource(show_spinner=False)
@@ -26,7 +36,7 @@ def _list_gemini_models(api_key: str):
 
 
 def get_gemini_model():
-    api_key = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY"))
+    api_key = get_secret_or_env("GEMINI_API_KEY")
     if not api_key or genai is None:
         return None
     usable = _list_gemini_models(api_key)
