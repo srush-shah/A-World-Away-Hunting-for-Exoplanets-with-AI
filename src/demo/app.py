@@ -1,7 +1,23 @@
 # src/demo/app.py
-import streamlit as st, requests, pandas as pd, io
+import streamlit as st, requests, pandas as pd, io, os
+
+try:
+    import google.generativeai as genai  # type: ignore
+except Exception:
+    genai = None  # Gemini is optional
 
 API = st.secrets.get("API_BASE", "http://localhost:8000")
+
+
+def get_gemini_model():
+    api_key = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY"))
+    if not api_key or genai is None:
+        return None
+    try:
+        genai.configure(api_key=api_key)
+        return genai.GenerativeModel("gemini-1.5-flash")
+    except Exception:
+        return None
 
 st.title("Galaxy Gazers — ExoEdge: Discovering Worlds Beyond Our Solar System")
 st.markdown("### *Kepler-trained, TESS-calibrated*")
@@ -57,6 +73,32 @@ if st.button("Predict"):
     if 'reasons' in result and result['reasons']!='':
         st.subheader("📋 Explanation")
         st.info(f"**Reason:** {result['reasons']}")
+
+    model = get_gemini_model()
+    if model is not None:
+        with st.expander("🤖 Ask Gemini to explain this prediction"):
+            guidance = st.text_area(
+                "Optional: add a question or focus (e.g., key drivers, astrophysical plausibility)",
+                value="Explain the likely drivers of this classification and any caveats.",
+            )
+            if st.button("Ask Gemini"):
+                try:
+                    prompt = (
+                        "You are assisting with exoplanet candidate triage. "
+                        "Given input features and a model's classification with probability, "
+                        "provide a concise, technically accurate explanation suitable for an astronomer. "
+                        "Avoid fabricating model internals; reason from the feature values and thresholds.\n\n"
+                        f"Features (JSON): {payload}\n"
+                        f"Thresholds: tau_lo={tau_lo:.3f}, tau_hi={tau_hi:.3f}\n"
+                        f"Model output: label={result.get('label')}, probability={result.get('probability')}\n"
+                        f"API provided reasons (may be empty): {result.get('reasons','')}\n\n"
+                        f"User guidance: {guidance}"
+                    )
+                    response = model.generate_content(prompt)
+                    text = getattr(response, "text", None) or "No response."
+                    st.markdown(text)
+                except Exception as e:
+                    st.warning(f"Gemini error: {e}")
     
     # # Optional: Show raw data in an expander for debugging
     # with st.expander("🔧 Raw API Response (for debugging)"):
