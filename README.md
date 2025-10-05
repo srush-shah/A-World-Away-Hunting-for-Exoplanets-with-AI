@@ -1,7 +1,7 @@
 # A-World-Away-Hunting-for-Exoplanets-with-AI
 NASA International Space Apps Challenge 2025
 
-What is this?
+
 
 A world away turns NASA’s public exoplanet tables into calibrated planet probabilities with transparent reasons so scientists can decide what to follow up—fast.
 
